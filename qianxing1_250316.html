@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浅行 | 个人网站</title>
+    <style>
+      :root {
+        --primary: #2a2f4f;
+        --secondary: #917fb3;
+        --accent: #e5beec;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", "Microsoft YaHei", system-ui;
+      }
+
+      body {
+        line-height: 1.8;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      }
+
+      header {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1.5rem 2rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        margin-right: 1.5rem;
+        transition: transform 0.3s;
+        border: 2px solid var(--accent);
+      }
+
+      .logo:hover {
+        transform: rotate(10deg);
+      }
+
+      .header-content {
+        flex: 1;
+      }
+
+      nav {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.2rem;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav a {
+        color: var(--primary);
+        text-decoration: none;
+        margin: 0 1.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+
+      nav a:hover {
+        background: var(--accent);
+        color: white;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      section {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2.5rem;
+        margin: 2rem 0;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s;
+      }
+
+      section:hover {
+        transform: translateY(-5px);
+      }
+
+      .portfolio {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .project {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid var(--secondary);
+        transition: all 0.3s;
+      }
+
+      .project-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-icon {
+        font-size: 1.5rem;
+        color: var(--secondary);
+      }
+
+      .tech-stack {
+        color: var(--primary);
+        opacity: 0.8;
+        font-size: 0.9em;
+        margin: 0.5rem 0;
+      }
+
+      .project-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: transform 0.3s;
+      }
+
+      .project-link:hover {
+        transform: translateX(5px);
+      }
+
+      .project:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      footer {
+        background: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+      }
+
+      .wechat-tooltip {
+        position: relative;
+      }
+
+      .wechat-qrcode {
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      .wechat-tooltip:hover .wechat-qrcode {
+        display: block;
+      }
+
+      .wechat-qrcode img {
+        width: 150px;
+        height: 200px;
+      }
+
+      .contact-icons {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .contact-icons a {
+        color: #e5e5e5;
+        font-size: 1.8rem;
+        transition: all 0.3s;
+      }
+
+      .contact-icons a:hover {
+        color: var(--accent);
+        transform: scale(1.2);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        transition: transform 0.3s;
+      }
+
+      .contact-item i {
+        font-size: 2rem;
+        color: var(--secondary);
+      }
+
+      .contact-item:hover {
+        transform: translateY(-3px);
+      }
+
+      .copy-target {
+        cursor: pointer;
+        position: relative;
+      }
+
+      .copy-target:hover::after {
+        content: "点击复制";
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        font-size: 0.8em;
+        white-space: nowrap;
+      }
+
+      .copy-target1:hover::after {
+        content: "点击跳转";
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        font-size: 0.8em;
+        white-space: nowrap;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        max-width: 300px;
+        background: white;
+        padding: 2rem;
+        text-align: center;
+        width: 85%;
+        margin: 0.5rem;
+        border-radius: 12px;
+        position: relative;
+      }
+
+      .close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .logo {
+          margin: 0 0 1rem 0;
+        }
+
+        nav {
+          padding: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+
+        nav a {
+          padding: 0.5rem 0.8rem;
+          margin: 0.3rem;
+          font-size: 0.9em;
+        }
+
+        .wechat-qrcode img {
+          width: 120px;
+          height: 160px;
+        }
+
+        .modal-content {
+          max-width: 90%;
+          padding: 1.5rem;
+        }
+
+        #portfolio h2 {
+          text-align: center;
+        }
+
+        .portfolio {
+          grid-template-columns: 1fr;
+        }
+
+        .project {
+          margin: 1rem auto;
+          width: calc(100% - 2rem);
+          max-width: 500px;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <header>
+      <img
+        src="https://s21.ax1x.com/2025/03/09/pEtOL8g.png"
+        alt="浅行个人Logo"
+        class="logo"
+      />
+      <div class="header-content">
+        <h1>浅行的创意空间</h1>
+        <p>编程学习中 | 知识分享者 | 终身学习者</p>
+      </div>
+    </header>
+
+    <nav aria-label="主导航">
+      <a href="#home"><i class="fas fa-home"></i> 首页</a>
+      <a href="#about"><i class="fas fa-user"></i> 关于</a>
+      <a href="#portfolio"><i class="fas fa-briefcase"></i> 作品</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> 联系</a>
+    </nav>
+
+    <div class="container">
+      <section id="home">
+        <h2>你好呀 欢迎来到我的空间</h2>
+        <p>
+          在这里我将分享我的编程学习经验、知识分享、个人心得、生活感悟等，欢迎与我交流...
+        </p>
+      </section>
+
+      <section id="about">
+        <h2>关于我</h2>
+        <img
+          src="avatar.jpg"
+          alt="浅行个人头像"
+          style="width: 150px; border-radius: 50%"
+        />
+        <p>我是浅行，目前宅家学编程，喜欢分享，乐于助人...</p>
+        <h3>兴趣爱好</h3>
+        <ul
+          class="skills"
+          style="margin-left: 20px; list-style-position: inside"
+        >
+          <li>影视</li>
+          <li>音乐</li>
+          <li>读书</li>
+          <li>美食</li>
+        </ul>
+      </section>
+
+      <section id="portfolio">
+        <h2>作品展示</h2>
+        <div class="portfolio">
+          <div class="project">
+            <div class="project-header">
+              <i class="fas fa-shopping-cart project-icon"></i>
+              <h3>知识管理系统</h3>
+            </div>
+            <div class="project-content">
+              <p class="tech-stack">其他项目正在进行中...</p>
+              <p>学习方法论、知识管理、效率提升...</p>
+              <a href="#" class="project-link">查看详情 →</a>
+            </div>
+          </div>
+          <div class="project">
+            <div class="project-header">
+              <i class="fas fa-chart-line project-icon"></i>
+              <h3>时间管理系统</h3>
+            </div>
+            <div class="project-content">
+              <p class="tech-stack">其他项目正在进行中</p>
+              <p>精力管理、时间管理、效率提升...</p>
+              <a href="#" class="project-link">查看详情 →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>📬 联系我</h2>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>邮箱</h3>
+              <p class="copy-target">172667130@qq.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-weixin"></i>
+            <div>
+              <h3>微信</h3>
+              <p class="copy-target">Qian-lidong</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <div>
+              <h3>GitHub</h3>
+              <a
+                href="https://github.com/01qian"
+                class="copy-target1"
+                target="_blank"
+                rel="noopener noreferrer"
+                >github.com/01qian</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="contact-icons">
+        <a
+          href="https://github.com/01qian"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+        <a
+          href="https://linkedin.com/in/01qian"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="#wechat-modal" class="wechat-tooltip" aria-label="微信">
+          <i class="fab fa-weixin"></i>
+          <span class="wechat-qrcode">
+            <img
+              src="https://s21.ax1x.com/2025/03/15/pEadj6s.jpg"
+              alt="浅行微信二维码"
+            />
+          </span>
+        </a>
+      </div>
+      <p>© <span id="currentYear"></span> 浅行 · 用代码创造价值</p>
+    </footer>
+
+    <div id="wechat-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" aria-label="关闭">&times;</span>
+        <h2>微信扫一扫</h2>
+        <p>关注微信公众号，获取更多精彩内容</p>
+        <img
+          src="https://s21.ax1x.com/2025/03/15/pEadj6s.jpg"
+          alt="浅行微信公众号二维码"
+        />
+      </div>
+    </div>
+
+    <script>
+      // 复制功能
+      const copyTargets = document.querySelectorAll(".copy-target");
+      copyTargets.forEach((target) => {
+        target.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(target.textContent);
+            const tip = document.createElement("div");
+            tip.textContent = "✓ 已复制";
+            tip.style.cssText =
+              "position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#4CAF50;color:white;padding:8px 16px;border-radius:4px;z-index:1001;";
+            document.body.appendChild(tip);
+            setTimeout(() => tip.remove(), 1000);
+          } catch (err) {
+            console.error("复制失败:", err);
+          }
+        });
+      });
+
+      // 年份更新
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+      // 微信弹窗控制
+      const wechatModal = document.getElementById("wechat-modal");
+      const wechatClose = document.querySelector(".close");
+
+      document.querySelectorAll(".wechat-tooltip").forEach((tooltip) => {
+        tooltip.addEventListener("click", (e) => {
+          e.preventDefault();
+          wechatModal.style.display = "flex";
+        });
+      });
+
+      wechatClose.addEventListener("click", () => {
+        wechatModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === wechatModal) {
+          wechatModal.style.display = "none";
+        }
+      });
+
+      // 防止滚动穿透
+      wechatModal.addEventListener("wheel", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>

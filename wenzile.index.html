@@ -9,12 +9,9 @@
         margin: 0;
         height: 100vh;
         background-color: #eee;
-        font-family: 'Permanent Marker', cursive;
-        
-    }
-      /* {
-        border: 1px solid black;
-      }*/
+        font-family: 'Arial', sans-serif;
+        color: #333;
+      }
       .flex {
         display: flex;
       }
@@ -31,20 +28,65 @@
       .xjz {
         align-items: center;
       }
-       .yy{ 
+      .yy { 
         box-shadow:  rgb(0 0 0 / 20%) 0px 2px 1px -1px,
-          rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;;
+          rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+      }
+      .box {
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 20px;
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
       }
       .box:hover {
-            transform: translateY(-20px);
-            transition: all 0.3s ease-in-out;
-        }
-    
+        transform: translateY(-10px);
+        background-color: #f9f9f9;
+      }
+      .box img {
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-right: 20px;
+      }
+      .box a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .box a:hover {
+        text-decoration: underline;
+      }
+      h3 {
+        margin-top: 0;
+        color: #555;
+      }
+      p {
+        line-height: 1.6;
+      }
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .contact-info p {
+        margin: 5px 0;
+      }
+      .contact-info a {
+        margin-top: 10px;
+      }
+      .footer {
+        background: linear-gradient(to bottom, #87CEEB, #00BFFF);
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body>
     <!-- 顶栏 -->
-    <div class="jz xjz yy"style="background: linear-gradient(to bottom, #87CEEB, #00BFFF) ;height: 80px;">
+    <div class="jz xjz yy" style="background: linear-gradient(to bottom, #87CEEB, #00BFFF); height: 80px;">
       <img
         src="https://avatars.githubusercontent.com/u/201240434?s=400&u=06edd6de8cc299c0c17c36358aded9325d55ee4b&v=4"
         alt="我的头像"
@@ -53,22 +95,25 @@
       <h3>是温某人吖的个人网站</h3>
     </div>
     <!-- 主干部分 -->
-    <div class="baise flex1 flex"style="height: 100vh;">
-        <!-- 部分1 -->
-      <div style="height: 100px"class="box">
+    <div class="baise flex1 flex" style="height: calc(100vh - 200px);">
+      <!-- 部分1 -->
+      <div class="box">
         <p><h3>个人介绍：</h3>我是一个爱好编程代码、唱歌、运动的boy，我觉得，这个世界很美好，也很广阔，有太多的东西值得我去探索了，所以我想投入到探索世界美好的生活之中</p>
       </div>
       <!-- 部分2 -->
-      <div class="box "> <p style="height: 100px;"><h3>在干嘛：</h3>现在我已经基本掌握了html和css，正在认真学习JavaScript代码，随便在b站发点破视频以练习剪辑技术，闲暇之余就去戏鲸上玩玩配音或者去听听歌</p></div>
+      <div class="box">
+        <p><h3>在干嘛：</h3>现在我已经基本掌握了html和css，正在认真学习JavaScript代码，随便在b站发点破视频以练习剪辑技术，闲暇之余就去戏鲸上玩玩配音或者去听听歌</p>
+      </div>
     </div>
     <!-- 部分3 -->
-    <div class="box baise yy"style="height: 150px">
-        <p><h3>联系方式：</h3><a href="https：github.com/wenzile666" >github主页：https：github.com/wenzile666</a>
-        </p><p font-color="green">vx:WZL7003</p>
+    <div class="box baise yy contact-info" style="height: auto;">
+      <p><h3>联系方式：</h3></p>
+      <p><a href="https://github.com/wenzile666" target="_blank">GitHub主页：https://github.com/wenzile666</a></p>
+      <p>vx: WZL7003</p>
     </div>
     <!-- 底栏 -->
-     <div  style="background: linear-gradient(to bottom, #87CEEB, #00BFFF) ;height: 60px;">
-        <p><h3 class="jz">版权所有：@wenzile666</h3></p>
+    <div class="footer">
+      <p><h3 class="jz">版权所有：@wenzile666</h3></p>
     </div>
   </body>
 </html>

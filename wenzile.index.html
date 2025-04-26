@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wenzile666</title>
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/wenzile666/670/refs/heads/main/favicon.ico">
+    <title>温某人的个人网站</title>
+    <link rel="stylesheet" href="https://raw.github.com/wenzile666/670/refs/heads/main/favicon.ico">
     <style>
       body {
         margin: 0;
@@ -93,12 +93,30 @@
       background-color: rgb(197, 255, 236);
      }
     </style>
+      <script>
+        function copyText(element) {
+            // 创建一个临时的textarea元素用于复制
+            var tempTextArea = document.createElement("textarea");
+            // 设置textarea的值为你想要复制的内容
+            tempTextArea.value = element.innerText;
+            // 将textarea添加到body中
+            document.body.appendChild(tempTextArea);
+            // 选中textarea中的内容
+            tempTextArea.select();
+            // 复制选中的内容
+            document.execCommand("Copy");
+            // 移除临时的textarea元素
+            document.body.removeChild(tempTextArea);
+            // 可选：添加一个提示信息，告诉用户已经复制成功
+            alert("已复制: " + element.innerText);
+        }
+    </script>
   </head>
   <body>
     <!-- 顶栏 -->
     <div class="jz xjz yy" style="background: linear-gradient(to bottom, #00ccff, #ffffff); height: 80px;">
       <img
-        src="https://avatars.githubusercontent.com/u/201240434?s=400&u=06edd6de8cc299c0c17c36358aded9325d55ee4b&v=4"
+        src="https://res.cloudinary.com/dkqdxq985/image/upload/v1746012656/205E52207CB1ACB8D4B4590F10FFB897_mwwl4c.png"
         alt="我的头像"
         height="60px"
       />
@@ -118,7 +136,7 @@
     <!-- 部分3 -->
      <div style="margin: 20px; height: auto;"  class="baise box yy">
       <p><h3>项目</h3>
-      <p>一.音乐专辑《More Beauty》</p><img src="https://raw.githubusercontent.com/wenzile666/670/refs/heads/main/微信图片_20250412105552.png" alt="图片" height="120px"></p>
+      <p>一.音乐专辑《More Beauty》</p><img src="https://res.cloudinary.com/dkqdxq985/image/upload/v1745659792/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250412105552_wsfqjk.png" alt="图片" height="120px"></p>
       <p>二.JavaScript笔记<br>
         <a href="https://www.mubu.com/doc/3MynnyZFIP5">点击查看</a>
       </p>
@@ -164,17 +182,20 @@
         alt="图片" height="50" width="50">
      </div>
     </div>
-     
+
     <!-- 部分5 -->
     <div class="box baise yy contact-info" style="height: auto;">
       <p><h3>联系方式：</h3></p>
-      <p><a href="https://github.com/wenzile666" target="_blank">GitHub主页：https://github.com/wenzile666</a><br><a href="https://github.com/wenzile666">https://github.com/wenzile666(镜像)</a></p>
-      <p>vx: WZL7003</p>
+      <p><a href="https://github.com/wenzile666" target="_blank">GitHub主页：https://github.com/wenzile666</a><br><a href="https://kkgithub.com/wenzile666">https://kkgithub.com/wenzile666(镜像)</a></p>
+      <p onclick="copyText(this)">vx: WZL7003</p>
+      <p onclick="copyText(this)">邮箱：3862575421@qq.com</p>
+    </div>
+  
     </div>
     <!-- 底栏 -->
     <div class="footer">
       <p><h3 class="jz">版权所有：@wenzile666<br>
-      版本号：v1.03<br>更新时间：2025.4.26</h3></p>
+      版本号：v1.04<br>更新时间：2025.5.1</h3></p>
     </div>
   </body>
 </html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>余温</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      font-size: 1rem; /* 设置基础字体大小 */
+      position: relative;
+    }
+    
+    .flex {
+      display: flex;
+      flex-direction: column; /* 默认为列布局，适应移动端 */
+    }
+    
+    @media (min-width: 768px) {
+      .flex {
+        flex-direction: row; /* 在较大屏幕上改为行布局 */
+      }
+    }
+    
+    .flex1 {
+      flex: 1;
+    }
+    
+    .jc {
+      justify-content: center;
+    }
+    
+    .je {
+      justify-content: flex-end;
+    }
+    
+    .baise {
+      background-color: #ffffff;
+    }
+    
+    .column {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .yy {
+      box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+        rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+    }
+    
+    .jz {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .ac {
+      align-items: center;
+    }
+    
+    .box {
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+      margin-bottom: 10px; /* 添加底部间距 */
+      padding: 10px; /* 添加内边距 */
+    }
+    
+    .box:hover {
+      transform: translateY(-10px);
+      background-color: #f9f9f9;
+    }
+    
+    .box img {
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-right: 10px; /* 减小图片右边距 */
+      width: 50px; /* 设置图片宽度 */
+      height: 50px; /* 设置图片高度 */
+    }
+    
+    .box a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 0.9rem; /* 使用相对单位 */
+    }
+    
+    .box a:hover {
+      text-decoration: underline;
+    }
+    
+    .carousel {
+      position: relative;
+      width: 100%; /* 盒子宽度改为百分比 */
+      height: 200px; /* 你可以根据需要调整盒子的高度 */
+      overflow: hidden;
+      margin-bottom: 20px; /* 添加底部间距 */
+    }
+    
+    @media (max-width: 767px) {
+      .carousel {
+        height: 150px; /* 在移动设备上减小轮播图高度 */
+      }
+    }
+    
+    .carousel-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 使图片覆盖整个盒子 */
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    
+    .carousel-image.active {
+      opacity: 1;
+    }
+    
+    .footer {
+      background: #1d1d1d;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem; /* 使用相对单位 */
+      padding: 10px; /* 添加内边距 */
+    }
+    
+    .bg {
+      background: #1d1d1d;
+    }
+    
+    .color {
+      color: #ffffff;
+    }
+    
+    /* 侧栏样式调整 */
+    .sidebar {
+      width: 200px; /* 固定宽度 */
+      padding: 10px;
+    }
+    
+    @media (max-width: 767px) {
+      .sidebar {
+        width: 100%; /* 在移动设备上改为100%宽度 */
+      }
+    }
+    
+    /* 主体部分样式调整 */
+    .main-content {
+      flex: 1;
+      padding: 10px;
+    }
+    
+    @media (max-width: 767px) {
+      .main-content {
+        margin-top: 10px; /* 在移动设备上添加顶部间距 */
+      }
+    }
+    
+    /* 弹窗样式 */
+    .modal {
+      display: none; /* 默认隐藏弹窗 */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    }
+    
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 垂直居中 */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* 弹窗宽度 */
+      max-width: 600px; /* 最大宽度 */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- 大盒子 -->
+  <div class="flex" style="height: auto">
+    <!-- 侧栏 -->
+    <div class="baise sidebar">
+      <!-- logo -->
+      <div style="margin: 0; width: auto; height: auto">
+        <img
+          src="https://res.cloudinary.com/dkqdxq985/image/upload/v1745659521/logo-transparent_awfema.png"
+          alt="图片"
+          width="150px"
+          height="auto"
+        />
+      </div>
+      <!-- 侧栏主体部分 -->
+      <div class="column flex1" style="margin: 0">
+        <!-- 在线 -->
+        <div class="jz ac yy box" style="height: 40px">
+          <p>在线使用</p><a href="https://wenzile666.github.io/670/yuwen.index.html"></a>
+        </div>
+        <!-- 下载 -->
+        <div class="jz ac yy box" style="height: 40px; background-color: rgb(198, 197, 197);">
+          <p>下载使用</p>
+        </div>
+        <!-- 关于开发者 -->
+        <div class="jz ac yy box" style="height: 40px">
+          <a href="https://wenzile666.github.io/670/wenzile.index.html"
+            >关于开发者</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- 主体部分 -->
+    <div class="column flex1 main-content">
+      <!-- 顶栏 -->
+      <div class="jc" style="height: 60px">
+        <h2 style="font-size: 1.5rem;">余温——一个实用的工具大全</h2> <!-- 使用相对单位 -->
+      </div>
+      <!-- 内容部分 -->
+      <div class="flex1">
+        <!--轮播图部分  -->
+        <div class="carousel">
+          <img
+            src="https://res.cloudinary.com/dkqdxq985/image/upload/v1746089698/%E4%B8%8B%E8%BD%BD_oitwpz.jpg"
+            alt="图片1"
+            class="carousel-image"
+          />
+          <img
+            src="https://res.cloudinary.com/dkqdxq985/image/upload/v1746089803/%E4%B8%8B%E8%BD%BD_1_eaxxi7.jpg"
+            alt="图片2"
+            class="carousel-image"
+          />
+          <img
+            src="https://res.cloudinary.com/dkqdxq985/image/upload/v1746089975/%E4%B8%8B%E8%BD%BD_2_zoc2lz.jpg"
+            alt="图片4"
+            class="carousel-image"
+          />
+          <img
+            src="https://tse4-mm.cn.bing.net/th/id/OIP-C.wWQZ_AbDhej8h4QPxHSIxwHaEK?w=289&h=180&c=7&r=0&o=5&dpr=4&pid=1.7"
+            alt="图片5"
+            class="carousel-image"
+          />
+        </div>
+        <!-- 正文内容 -->
+        <div class="flex1 column">
+          <!-- 标题 -->
+          <div style="height: 40px" class="color bg jz ac">
+            <p>下载使用:</p>
+          </div>
+          <!-- 栏1 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://pc.qq.com/detail/2/detail_360422.html">TranSmart|一个全能的翻译软件</a>
+          </div>
+          <!-- 栏2 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://mojieapp.org/">魔戒|全网价格最实惠的VPN</a>
+          </div>
+          <!-- 栏3 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://www.xuanfeng6688.com/?C008">旋风加速器|一个免费VPN(个人认为功能欠佳)</a>
+          </div>
+          <!-- 栏4 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://soft.3dmgame.com/down/200436.html">Dism++|优化Windows系统清理/备份/驱动管理</a>
+          </div>
+          <!-- 栏5 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://www.bleachbit.org/">BleachBit|一个开源的强大清理软件</a>
+          </div>
+          <!-- 栏6 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://www.voidtools.com/zh-cn/downloads/">Everything|一个速度超越自带系统的文件搜索工具</a>
+          </div>
+          <!-- 栏7 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://ditto-cp.sourceforge.io/">Ditto|记录剪贴板历史，支持多端粘贴</a>
+          </div>
+          <!-- 栏8 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://www.veracrypt.fr/en/Code.html">VeraCrypt|一个开源的创建加密磁盘的工具</a>
+          </div>
+          <!-- 栏9 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://code.visualstudio.com/">VS Code|微软开源代码编辑器</a>
+          </div>
+          <!-- 栏10 -->
+          <div style="height: 40px" class="yy jz ac box">
+            <a href="https://git-scm.com/?hl=zh-cn">Git|一个开源的代码版本控制系统<br>(github打不开的可以直接复制下载链接至迅雷等)</a>
+          </div>
+          <!-- 栏11 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://pot-x1.whrszx.com/index.html?msclkid=e38e218ac4bc16755809499e1e7eca28">PotPlayer|一个开源的全能视频播放器</a>
+            </div>
+            <!-- 栏12 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://www.gimp.org/downloads/">GIMP|开源Photoshop替代品</a>
+            </div>
+            <!-- 栏13 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://www.xnview.com/en/">XnView|轻量看图/批量处理工具</a>
+            </div>
+            <!-- 栏14 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="http://www.blackmagicdesign.com/products/davinciresolve">DaVinci Resolve|专业免费视频剪辑/调色</a>
+            </div>
+            <!-- 栏15 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://handbrake.fr/downloads.php">HandBrake|开源的视频转码工具</a>
+            </div>
+            <!-- 栏16 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://zh.snipaste.com/">Snipaste|支持标注/置顶窗口的截图+贴图工具</a>
+            </div>
+            <!-- 栏17 -->
+            <div style="height: 40px" class="yy jz ac box">
+              <a href="https://obsproject.com/zh-cn/download">OBS Studio|开源的直播/录制软件</a>
+            </div>
+            <!-- 尾栏 -->
+              <div style="height: 40px" class="yy jz ac box bg">
+              <a href="https://www.deepseek.com/">——更多工具需要和使用说明点此询问DeepSeek</a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底栏 -->
+  <div class="footer">
+    <p><h3 class="jz">版权所有：@余温网络文化<br>
+    版本号：v1.01<br>更新时间：2025.5.2</h3></p>
+  </div>
+  
+  
+  
+  <script>
+   
+    // 轮播图脚本
+    const images = document.querySelectorAll(".carousel-image");
+    let currentIndex = 0;
+
+    function showNextImage() {
+      images[currentIndex].classList.remove("active");
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add("active");
+    }
+
+    images[currentIndex].classList.add("active");
+
+    setInterval(showNextImage, 7000); // 每7秒切换一次图片，你可以根据需要调整时间间隔
+  </script>
+</body>
+</html>
